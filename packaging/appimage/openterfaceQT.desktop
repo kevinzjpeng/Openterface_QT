@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=OpenterfaceQT
-Exec=openterfaceQT
+Exec=openterface-wrapper.sh
 Icon=openterfaceQT
 Comment=OpenterfaceQT Application
 Categories=Utility;

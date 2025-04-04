@@ -32,6 +32,8 @@ jobs:
           sudo apt upgrade -y
           sudo apt install build-essential
           sudo apt-get install -y libusb-1.0-0-dev rpm libfuse2
+          # Add multimedia dependencies
+          sudo apt-get install -y ffmpeg libavcodec-dev libavformat-dev libswscale-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
           
           wget -O linuxdeploy-x86_64.AppImage https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
           wget -O linuxdeploy-plugin-qt-x86_64.AppImage https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
@@ -203,15 +205,19 @@ jobs:
           # Copy executable
           cp ${{ env.BUILD_DIR }}/openterfaceQT AppDir/usr/bin/
           
+          # Copy wrapper script
+          cp ${{ github.workspace }}/packaging/appimage/openterface-wrapper.sh AppDir/usr/bin/
+          chmod +x AppDir/usr/bin/openterface-wrapper.sh
+          
           # Copy icon
           cp ${{ github.workspace }}/images/icon_256.png AppDir/usr/share/icons/hicolor/256x256/apps/openterfaceQT.png
           
-          # Copy config files if needed
+          # Copy config files to share directory
           mkdir -p AppDir/usr/share/openterfaceQT/config/{keyboards,languages}
           cp -r ${{ env.BUILD_DIR }}/config/keyboards/* AppDir/usr/share/openterfaceQT/config/keyboards/ || true
           cp -r ${{ env.BUILD_DIR }}/config/languages/* AppDir/usr/share/openterfaceQT/config/languages/ || true
           
-          # Copy desktop file from packaging/appimage folder
+          # Copy desktop file directly from packaging/appimage folder
           cp ${{ github.workspace }}/packaging/appimage/openterfaceQT.desktop AppDir/usr/share/applications/
           
           # Copy and prepare AppStream metadata
@@ -254,32 +260,10 @@ jobs:
           export QML_SOURCES_PATHS=${{ github.workspace }}/qml
           export VERSION=${{ env.VERSION }}
           export OUTPUT="${{ env.ARTIFACT }}-${{ env.VERSION }}-x86_64.AppImage"
+          export ADDITIONAL_PLUGINS="multimedia;xcbglintegrations;platformthemes;iconengines;imageformats;tls"
           
-          # Create a script to run linuxdeploy with proper environment
-          cat > run_deploy.sh << 'EOF'
-          #!/bin/bash
-          set -x  # Print commands for debugging
-          env | grep -E 'QT|QMAKE|QML'  # Display Qt-related environment variables
-          
-          # Run linuxdeploy with Qt plugin
-          linuxdeploy-x86_64.AppImage \
-            --appdir=AppDir \
-            --plugin=qt \
-            --desktop-file=AppDir/usr/share/applications/openterfaceQT.desktop \
-            --icon-file=AppDir/usr/share/icons/hicolor/256x256/apps/openterfaceQT.png \
-            --output=appimage
-            
-          EXIT_CODE=$?
-          echo "linuxdeploy exit code: $EXIT_CODE"
-          
-          # List all files in current directory for debugging
-          echo "Files in current directory:"
-          ls -la
-          
-          # Exit with the linuxdeploy exit code
-          exit $EXIT_CODE
-          EOF
-          
+          # Copy run_deploy.sh from packaging/appimage directory
+          cp ${{ github.workspace }}/packaging/appimage/run_deploy.sh ./
           chmod +x run_deploy.sh
           ./run_deploy.sh
           
