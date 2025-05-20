@@ -46,8 +46,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "{#SourcePackage}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#SourcePackage}\config\languages\*.qm"; DestDir: "{app}\config\languages"; Flags: ignoreversion
-Source: "{#SourcePackage}\config\keyboards\*.json"; DestDir: "{app}\config\keyboards"; Flags: ignoreversion
+Source: "{#SourcePackage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#SourcePackage}\driver\windows\CH341SER.INF"; DestDir: {app}\driver;
 Source: "{#SourcePackage}\driver\windows\CH341S64.SYS"; DestDir: {app}\driver;
 
