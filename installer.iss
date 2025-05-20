@@ -47,6 +47,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#SourcePackage}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SourcePackage}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Exclude: "opengl32sw.dll; D3Dcompiler_47.dll"
 Source: "{#SourcePackage}\driver\windows\CH341SER.INF"; DestDir: {app}\driver;
 Source: "{#SourcePackage}\driver\windows\CH341S64.SYS"; DestDir: {app}\driver;
 
