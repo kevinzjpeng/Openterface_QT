@@ -82,12 +82,12 @@
         <translation>&lt;a href=&quot;#&quot;&gt;Dokumentation for miljøopsætning l&apos;environnement&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="91"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="102"/>
         <source> The driver is installed. No further action is required.</source>
         <translation> Driveren er installeret. Ingen yderligere handling er påkrævet.</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="93"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="104"/>
         <source> The driver is missing. Openterface Mini-KVM will install it automatically.</source>
         <translation> Driveren mangler. Openterface Mini-KVM vil installere den automatisk.</translation>
     </message>
@@ -98,97 +98,105 @@
 </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="96"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="107"/>
         <source> The device is not plugged in. Please plug it in and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="117"/>
-        <source>The following steps help you install the driver and add user to correct group. Current status:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="118"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="129"/>
         <source>‣ Driver Installed: </source>
         <translation>‣ Driver installeret: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="119"/>
         <source>‣ In Dialout Group: </source>
-        <translation>‣ I Dialout-gruppen: </translation>
+        <translation type="vanished">‣ I Dialout-gruppen: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="120"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="128"/>
+        <source>The following steps help you install the driver and access the device permissions. Current status:&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="130"/>
+        <source>‣ In Serial Port Permission: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="131"/>
         <source>‣ HID Permission: </source>
         <translation>‣ HID-tilladelse: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source>‣ BRLTTY checking: </source>
         <translation>‣ BRLTTY-tjek: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source> (needs removal)</source>
         <translation> (kræver fjernelse)</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source> (not running)</source>
         <translation> (kører ikke)</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="167"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="178"/>
         <source>Select Destination Directory</source>
         <translation>Vælg målmappen</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
         <source>Driver Installed: </source>
         <translation>Driver installeret: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
         <source>No</source>
         <translation>Nej</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <source>In Dialout Group: </source>
-        <translation>I Dialout-gruppen: </translation>
+        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <source>Serial port Permission: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
+        <source>In Dialout Group: </source>
+        <translation type="vanished">I Dialout-gruppen: </translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
         <source>HID Permission: </source>
         <translation>HID-tilladelse: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
         <source>BRLTTY is Running: </source>
         <translation>BRLTTY kører: </translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
         <source>Yes (needs removal)</source>
         <translation>Ja (kræver fjernelse)</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="246"/>
         <source>Restart Required</source>
         <translation>Genstart påkrævet</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="247"/>
         <source>The driver has been installed. A system restart and device re-plugging is required for the changes to take effect.
 
 Would you like to restart your computer now?</source>
@@ -197,12 +205,12 @@ Would you like to restart your computer now?</source>
 Vil du genstarte din computer nu?</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="250"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="261"/>
         <source>Restart Later</source>
         <translation>Genstart senere</translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="251"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="262"/>
         <source>Please remember to restart your computer and re-plug the device for the driver to work properly.</source>
         <translation>Husk at genstarte din computer og genindkoble enheden, så driveren fungerer korrekt.</translation>
     </message>
@@ -689,12 +697,12 @@ Prøv igen efter at have genstartet programmet.</translation>
         <translation>Optaget &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../ui/mainwindow.cpp" line="1544"/>
+        <location filename="../../ui/mainwindow.cpp" line="1566"/>
         <source>Firmware Update</source>
         <translation>Firmwareopdatering</translation>
     </message>
     <message>
-        <location filename="../../ui/mainwindow.cpp" line="1545"/>
+        <location filename="../../ui/mainwindow.cpp" line="1567"/>
         <source>The firmware is up to date.
 Current version: </source>
         <translation type="unfinished"></translation>
@@ -978,7 +986,7 @@ Vil du fortsætte med opdateringen?</translation>
     </message>
     <message>
         <location filename="../../ui/preferences/targetcontrolpage.cpp" line="49"/>
-        <source>[Compatiblity] Standard USB keyboard + USB mouse device</source>
+        <source>[Compatibility] Standard USB keyboard + USB mouse device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

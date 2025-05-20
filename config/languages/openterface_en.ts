@@ -82,119 +82,119 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="91"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="102"/>
         <source> The driver is installed. No further action is required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="93"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="104"/>
         <source> The driver is missing. Openterface Mini-KVM will install it automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="96"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="107"/>
         <source> The device is not plugged in. Please plug it in and try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="117"/>
-        <source>The following steps help you install the driver and add user to correct group. Current status:&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="118"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="129"/>
         <source>‣ Driver Installed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="119"/>
-        <source>‣ In Dialout Group: </source>
+        <location filename="../../ui/advance/envdialog.cpp" line="128"/>
+        <source>The following steps help you install the driver and access the device permissions. Current status:&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="120"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="130"/>
+        <source>‣ In Serial Port Permission: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="131"/>
         <source>‣ HID Permission: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source>‣ BRLTTY checking: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source> (needs removal)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="121"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="132"/>
         <source> (not running)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="167"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="178"/>
         <source>Select Destination Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
         <source>Driver Installed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="223"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="234"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="235"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="236"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="224"/>
-        <source>In Dialout Group: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="225"/>
-        <source>HID Permission: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
-        <source>BRLTTY is Running: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="226"/>
-        <source>Yes (needs removal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../ui/advance/envdialog.cpp" line="235"/>
-        <source>Restart Required</source>
+        <source>Serial port Permission: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/advance/envdialog.cpp" line="236"/>
+        <source>HID Permission: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
+        <source>BRLTTY is Running: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="237"/>
+        <source>Yes (needs removal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="246"/>
+        <source>Restart Required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/advance/envdialog.cpp" line="247"/>
         <source>The driver has been installed. A system restart and device re-plugging is required for the changes to take effect.
 
 Would you like to restart your computer now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="250"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="261"/>
         <source>Restart Later</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/advance/envdialog.cpp" line="251"/>
+        <location filename="../../ui/advance/envdialog.cpp" line="262"/>
         <source>Please remember to restart your computer and re-plug the device for the driver to work properly.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -659,12 +659,12 @@ Please try again after restarting the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/mainwindow.cpp" line="1544"/>
+        <location filename="../../ui/mainwindow.cpp" line="1566"/>
         <source>Firmware Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/mainwindow.cpp" line="1545"/>
+        <location filename="../../ui/mainwindow.cpp" line="1567"/>
         <source>The firmware is up to date.
 Current version: </source>
         <translation type="unfinished"></translation>
@@ -849,7 +849,7 @@ Current version: </source>
     </message>
     <message>
         <location filename="../../ui/preferences/targetcontrolpage.cpp" line="49"/>
-        <source>[Compatiblity] Standard USB keyboard + USB mouse device</source>
+        <source>[Compatibility] Standard USB keyboard + USB mouse device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

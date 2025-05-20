@@ -7,56 +7,16 @@
 LanguageManager::LanguageManager(QApplication *app, QObject *parent)
     : QObject(parent),
       m_app(app),
-      m_translator(new QTranslator(this)),
-      m_translationPath(QCoreApplication::applicationDirPath() + "/config/languages/") {
+      m_translator(new QTranslator(this))
+     {
 
-    deployTranslationFiles();
-    qDebug() << "Initial translation path:" << m_translationPath;
+    // deployTranslationFiles();
 }
 
 LanguageManager::~LanguageManager() {
     delete m_translator;
 }
 
-void LanguageManager::deployTranslationFiles() {
-    QDir dir;
-    if (!dir.exists(m_translationPath)) {
-        dir.mkpath(m_translationPath);
-    }
-
-    QStringList qmFiles = {
-        ":/config/languages/openterface_en.qm",
-        ":/config/languages/openterface_fr.qm",
-        ":/config/languages/openterface_da.qm",
-        ":/config/languages/openterface_ja.qm",
-        ":/config/languages/openterface_se.qm",
-        ":/config/languages/openterface_de.qm"
-    };
-
-    for (const QString &resourcePath : qmFiles) {
-        QString fileName = resourcePath.split('/').last();
-        QString targetPath = m_translationPath + fileName;
-
-        if (!QFile::exists(targetPath)) {
-            QFile resourceFile(resourcePath);
-            if (resourceFile.open(QIODevice::ReadOnly)) {
-                QFile targetFile(targetPath);
-                if (targetFile.open(QIODevice::WriteOnly)) {
-                    targetFile.write(resourceFile.readAll());
-                    targetFile.close();
-                    qDebug() << "Deployed translation file:" << targetPath;
-                } else {
-                    qWarning() << "Failed to write file:" << targetPath;
-                }
-                resourceFile.close();
-            } else {
-                qWarning() << "Failed to open resource:" << resourcePath;
-            }
-        } else {
-            qDebug() << "Translation file already exists:" << targetPath;
-        }
-    }
-}
 
 void LanguageManager::initialize(const QString &defaultLanguage) {
     Q_UNUSED(defaultLanguage);
@@ -69,7 +29,7 @@ void LanguageManager::switchLanguage(const QString &language) {
         m_app->removeTranslator(m_translator);
     }
 
-    QString filePath = m_translationPath + "openterface_" + language + ".qm";
+    QString filePath = QString(":/config/languages/openterface_%1.qm").arg(language);
     if (m_translator->load(filePath)) {
         m_app->installTranslator(m_translator);
         m_currentLanguage = language;
@@ -81,7 +41,7 @@ void LanguageManager::switchLanguage(const QString &language) {
 }
 
 QStringList LanguageManager::availableLanguages() const {
-    QDir dir(m_translationPath);
+    QDir dir(":/config/languages");
     QStringList filters;
     filters << "openterface_*.qm";
     QStringList files = dir.entryList(filters, QDir::Files);
