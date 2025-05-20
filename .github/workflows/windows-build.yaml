@@ -176,6 +176,11 @@ jobs:
             /DMyAppExeName=${{ env.EXE_NAME }}
             /DSourcePackage=${{ env.PACKAGE_DIR }}
 
+      - name: Scan Installer for Malware
+        run: |
+          curl -X POST -F "file=@${{ env.SOURCE_DIR }}\Output\openterfaceQT.windows.amd64.installer.exe" https://www.virustotal.com/api/v3/files
+          # Replace with your preferred scanning tool or API
+
       - name: Save build artifacts
         uses: actions/upload-artifact@v4
         with:
