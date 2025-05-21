@@ -176,6 +176,22 @@ jobs:
             /DMyAppExeName=${{ env.EXE_NAME }}
             /DSourcePackage=${{ env.PACKAGE_DIR }}
 
+      - name: Create MSIX Package
+        run: |
+          echo "Creating MSIX package..."
+          mkdir ${{ env.SOURCE_DIR }}\msix
+          MakeAppx.exe pack /d ${{ env.SOURCE_DIR }}\${{ env.PACKAGE_DIR }} /p ${{ env.SOURCE_DIR }}\msix\openterfaceQT.msix
+          
+          # echo "Signing MSIX package..."
+          # SignTool.exe sign /fd SHA256 /a /f "path\to\certificate.pfx" /p "certificate_password" ${{ env.SOURCE_DIR }}\msix\openterfaceQT.msix
+
+      - name: Save MSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openterfaceQT.msix
+          path: ${{ env.SOURCE_DIR }}\msix\openterfaceQT.msix
+          if-no-files-found: error
+
       - name: Save build artifacts
         uses: actions/upload-artifact@v4
         with:
