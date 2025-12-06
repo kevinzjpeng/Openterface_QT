@@ -20,7 +20,6 @@ ENV http_proxy=$http_proxy \
 # Update package lists and install core build tools
 RUN apt-get update && apt-get install -y \
     build-essential \
-    cmake \
     ninja-build \
     pkg-config \
     curl \
@@ -32,6 +31,13 @@ RUN apt-get update && apt-get install -y \
     patchelf \
     gcc \
     desktop-file-utils
+
+# Upgrade CMake to 3.28+ from Kitware's official repository (Qt 6.6.3 requires CMake 3.24+)
+RUN apt-get install -y apt-transport-https gnupg lsb-release && \
+    curl https://apt.kitware.com/keys/kitware-archive-latest.asc | gpg --dearmor - > /usr/share/keyrings/kitware-archive-keyring.gpg && \
+    echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' > /etc/apt/sources.list.d/kitware.list && \
+    apt-get update && apt-get install -y --only-upgrade cmake && \
+    cmake --version
 
 # Install additional build tools
 RUN apt-get install -y \
