@@ -348,6 +348,14 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     endif()
 endif()
 
+# Copy local-build launcher to output directory
+add_custom_command(TARGET openterfaceQT POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_SOURCE_DIR}/build-script/openterfaceQT-local-launcher.sh"
+        "$<TARGET_FILE_DIR:openterfaceQT>/openterfaceQT-launcher.sh"
+    COMMENT "Copying local launcher to build directory"
+)
+
 # Qt components already found above
 # =============================================================================
 # Installation Targets (Linux only)

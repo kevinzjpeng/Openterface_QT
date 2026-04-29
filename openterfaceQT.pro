@@ -374,6 +374,9 @@ unix {
     }
 
     RESOURCES += driver/linux/drivers.qrc
+
+    # Copy local-build launcher to output directory after linking
+    QMAKE_POST_LINK = $$quote($$QMAKE_COPY $$quote($$PWD/build-script/openterfaceQT-local-launcher.sh) $$quote($$OUT_PWD/openterfaceQT-launcher.sh))
 }
 
 # Set platform-specific installation paths
