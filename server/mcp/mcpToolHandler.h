@@ -40,6 +40,7 @@ class McpToolHandler : public QObject {
 
 public:
     explicit McpToolHandler(QObject *parent = nullptr);
+    ~McpToolHandler() override;
 
     // Inject dependencies (same pattern as TcpServer::setCameraManager)
     void setCameraManager(CameraManager* cam);
