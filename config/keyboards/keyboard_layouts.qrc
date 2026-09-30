@@ -10,5 +10,6 @@
         <file>qwerty_se.json</file>
         <file>japanese.json</file>
         <file>qwerty_es.json</file>
+        <file>qwerty_it.json</file>
     </qresource>
 </RCC> 
