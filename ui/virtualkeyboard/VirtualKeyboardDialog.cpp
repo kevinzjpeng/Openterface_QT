@@ -2,61 +2,143 @@
 #include "../../host/HostManager.h"
 #include <QKeySequence>
 #include <QDebug>
+#include <QApplication>
+#include <QPalette>
 
-const QString VirtualKeyboardDialog::buttonStyle =
+// Style constants for a realistic keyboard appearance
+static const QString standardKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #888; "
+    "   border: 1px solid #999; "
     "   border-radius: 4px; "
-    "   background-color: #f0f0f0; "
-    "   color: #333; "
-    "   padding: 8px; "
-    "   margin: 2px; "
-    "   min-width: 40px; "
-    "   font-size: 12px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #ffffff, stop:0.5 #e8e8e8, stop:1 #d0d0d0); "
+    "   color: #222; "
+    "   padding: 6px 8px; "
+    "   margin: 1px; "
+    "   min-width: 38px; "
+    "   min-height: 38px; "
+    "   font-size: 13px; "
+    "   font-weight: 500; "
     "} "
     "QPushButton:hover { "
-    "   background-color: #e0e0e0; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #f5f5f5, stop:0.5 #e0e0e0, stop:1 #c8c8c8); "
     "} "
     "QPushButton:pressed { "
-    "   background-color: #c0c0c0; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
+    "   border: 1px solid #888; "
+    "   padding-top: 7px; "
+    "   padding-bottom: 5px; "
     "}";
 
-const QString VirtualKeyboardDialog::modifierButtonStyle =
+static const QString modifierKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #888; "
+    "   border: 1px solid #999; "
     "   border-radius: 4px; "
-    "   background-color: #d0d0ff; "
-    "   color: #333; "
-    "   padding: 8px; "
-    "   margin: 2px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #f5f5f5, stop:0.5 #e0e0e0, stop:1 #cccccc); "
+    "   color: #222; "
+    "   padding: 6px 8px; "
+    "   margin: 1px; "
     "   min-width: 50px; "
+    "   min-height: 38px; "
     "   font-size: 12px; "
+    "   font-weight: 600; "
     "} "
     "QPushButton:hover { "
-    "   background-color: #c0c0ff; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #eeeeee, stop:0.5 #d8d8d8, stop:1 #c0c0c0); "
     "} "
     "QPushButton:checked { "
-    "   background-color: #a0a0ff; "
-    "   border: 2px solid #6666ff; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #d0e8ff, stop:0.5 #a0c8ff, stop:1 #80b0ff); "
+    "   border: 2px solid #4a90d9; "
+    "   color: #1a3a5c; "
+    "} "
+    "QPushButton:checked:hover { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #c0dfff, stop:0.5 #90c0ff, stop:1 #70a8ff); "
     "}";
 
-const QString VirtualKeyboardDialog::pressedButtonStyle =
+static const QString functionKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #888; "
+    "   border: 1px solid #999; "
     "   border-radius: 4px; "
-    "   background-color: #ffcc00; "
-    "   color: #333; "
-    "   padding: 8px; "
-    "   margin: 2px; "
-    "   min-width: 40px; "
-    "   font-size: 12px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #f0f0f0, stop:0.5 #e0e0e0, stop:1 #d0d0d0); "
+    "   color: #444; "
+    "   padding: 4px 6px; "
+    "   margin: 1px; "
+    "   min-width: 36px; "
+    "   min-height: 30px; "
+    "   font-size: 11px; "
+    "   font-weight: 500; "
+    "} "
+    "QPushButton:hover { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
+    "} "
+    "QPushButton:pressed { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
     "}";
+
+static const QString specialKeyStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; "
+    "   border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
+    "   color: #333; "
+    "   padding: 6px 10px; "
+    "   margin: 1px; "
+    "   min-width: 45px; "
+    "   min-height: 38px; "
+    "   font-size: 12px; "
+    "   font-weight: 600; "
+    "} "
+    "QPushButton:hover { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #e0e0e0, stop:0.5 #d0d0d0, stop:1 #c0c0c0); "
+    "} "
+    "QPushButton:pressed { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #c8c8c8, stop:0.5 #b8b8b8, stop:1 #a8a8a8); "
+    "}";
+
+static const QString spaceBarStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; "
+    "   border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #f0f0f0, stop:0.5 #e0e0e0, stop:1 #d0d0d0); "
+    "   color: #222; "
+    "   padding: 6px 20px; "
+    "   margin: 1px; "
+    "   min-width: 200px; "
+    "   min-height: 38px; "
+    "   font-size: 13px; "
+    "   font-weight: 500; "
+    "} "
+    "QPushButton:hover { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
+    "} "
+    "QPushButton:pressed { "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
+    "}";
+
+const QString VirtualKeyboardDialog::buttonStyle = standardKeyStyle;
+const QString VirtualKeyboardDialog::modifierButtonStyle = modifierKeyStyle;
+const QString VirtualKeyboardDialog::pressedButtonStyle = specialKeyStyle;
 
 VirtualKeyboardDialog::VirtualKeyboardDialog(QWidget *parent)
     : QDialog(parent)
     , currentModifiers(0)
 {
-    setWindowTitle(tr("Virtual Keyboard"));
+    setWindowTitle(tr("Openterface Keyboard"));
     setWindowFlags(Qt::Dialog | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint);
     setAttribute(Qt::WA_DeleteOnClose, false);
 
@@ -67,13 +149,51 @@ VirtualKeyboardDialog::VirtualKeyboardDialog(QWidget *parent)
 
 void VirtualKeyboardDialog::setupUI()
 {
-    mainLayout = new QVBoxLayout(this);
-    mainLayout->setSpacing(4);
-    mainLayout->setContentsMargins(8, 8, 8, 8);
+    // Set dialog background color for keyboard-like appearance
+    setStyleSheet(
+        "QDialog { "
+        "   background-color: #e5e5e5; "
+        "   border: 1px solid #999; "
+        "   border-radius: 8px; "
+        "} "
+        "QLabel#titleLabel { "
+        "   color: #333; "
+        "   font-size: 14px; "
+        "   font-weight: bold; "
+        "   padding: 4px 8px; "
+        "   background-color: transparent; "
+        "}"
+    );
 
-    keyboardLayout = new QGridLayout();
-    keyboardLayout->setSpacing(4);
-    mainLayout->addLayout(keyboardLayout);
+    mainLayout = new QVBoxLayout(this);
+    mainLayout->setSpacing(3);
+    mainLayout->setContentsMargins(10, 6, 10, 10);
+
+    // Header with title
+    QHBoxLayout* headerLayout = new QHBoxLayout();
+    headerLayout->setContentsMargins(0, 0, 0, 0);
+    QLabel* titleLabel = new QLabel(tr("Openterface Keyboard"), this);
+    titleLabel->setObjectName("titleLabel");
+    headerLayout->addWidget(titleLabel);
+    headerLayout->addStretch();
+    mainLayout->addLayout(headerLayout);
+
+    // Keyboard container with darker background for depth
+    QWidget* keyboardContainer = new QWidget(this);
+    keyboardContainer->setStyleSheet(
+        "QWidget { "
+        "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+        "       stop:0 #d0d0d0, stop:0.1 #e0e0e0, stop:0.9 #d8d8d8, stop:1 #c0c0c0); "
+        "   border: 2px solid #888; "
+        "   border-radius: 6px; "
+        "}"
+    );
+
+    keyboardLayout = new QGridLayout(keyboardContainer);
+    keyboardLayout->setSpacing(2);
+    keyboardLayout->setContentsMargins(6, 6, 6, 6);
+
+    mainLayout->addWidget(keyboardContainer);
 
     setLayout(mainLayout);
 }
@@ -313,7 +433,39 @@ void VirtualKeyboardDialog::addBottomRow(QGridLayout* layout, int row)
 QPushButton* VirtualKeyboardDialog::createKeyButton(const QString& text, int keyCode, bool isModifier)
 {
     QPushButton* button = new QPushButton(text, this);
-    button->setStyleSheet(isModifier ? modifierButtonStyle : buttonStyle);
+
+    // Apply different styles based on key type for a more realistic look
+    if (isModifier) {
+        button->setStyleSheet(modifierButtonStyle);
+    } else {
+        // Check for special keys that need different styling
+        bool isSpecial = false;
+        bool isFunction = false;
+        bool isSpace = false;
+
+        if (keyCode == Qt::Key_Space) {
+            isSpace = true;
+        } else if (keyCode >= Qt::Key_F1 && keyCode <= Qt::Key_F12) {
+            isFunction = true;
+        } else if (keyCode == Qt::Key_Backspace || keyCode == Qt::Key_Tab ||
+                   keyCode == Qt::Key_CapsLock || keyCode == Qt::Key_Return ||
+                   keyCode == Qt::Key_Escape || keyCode == Qt::Key_Delete ||
+                   keyCode == Qt::Key_Shift || keyCode == Qt::Key_Control ||
+                   keyCode == Qt::Key_Alt || keyCode == Qt::Key_Meta) {
+            isSpecial = true;
+        }
+
+        if (isSpace) {
+            button->setStyleSheet(spaceBarStyle);
+        } else if (isFunction) {
+            button->setStyleSheet(functionKeyStyle);
+        } else if (isSpecial) {
+            button->setStyleSheet(specialKeyStyle);
+        } else {
+            button->setStyleSheet(buttonStyle);
+        }
+    }
+
     button->setProperty("keyCode", keyCode);
     button->setProperty("isModifier", isModifier);
 

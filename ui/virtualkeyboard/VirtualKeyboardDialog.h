@@ -4,7 +4,9 @@
 #include <QDialog>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QGridLayout>
+#include <QLabel>
 #include <QMap>
 
 class VirtualKeyboardDialog : public QDialog
