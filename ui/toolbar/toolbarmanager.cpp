@@ -107,6 +107,16 @@ void ToolbarManager::rebuildToolbar()
         toolbar->removeAction(a);
     }
 
+    // Add virtual keyboard button first
+    QPushButton *virtualKbButton = new QPushButton(tr("⌨"), toolbar);
+    virtualKbButton->setToolTip(tr("Virtual Keyboard"));
+    virtualKbButton->setStyleSheet(commonButtonStyle);
+    virtualKbButton->setFixedWidth(40);
+    toolbar->addWidget(virtualKbButton);
+    connect(virtualKbButton, &QPushButton::clicked, this, &ToolbarManager::onVirtualKeyboardClicked);
+
+    toolbar->addSeparator();
+
     // Re-add modifier toggle buttons first
     for (const auto& modInfo : modifierButtons) {
         QPushButton *button = addKeyButton(modInfo.text, modInfo.toolTip);
@@ -143,6 +153,11 @@ void ToolbarManager::rebuildToolbar()
 void ToolbarManager::onCustomKeyButtonClicked()
 {
     emit openCustomKeyConfig();
+}
+
+void ToolbarManager::onVirtualKeyboardClicked()
+{
+    emit openVirtualKeyboard();
 }
 
 QPushButton *ToolbarManager::addKeyButton(const QString& text, const QString& toolTip)

@@ -54,6 +54,7 @@
 #include "../../SysKeyBlocker/SystemKeyBlocker.h"
 #include "../customkey/customkeymanager.h"
 #include "../ShortcutManager.h"
+#include "../virtualkeyboard/VirtualKeyboardDialog.h"
 
 #include <QTimer>
 #include <QStackedLayout>
@@ -72,6 +73,7 @@ MainWindowInitializer::MainWindowInitializer(MainWindow *mainWindow, QObject *pa
     , m_cameraManager(mainWindow->m_cameraManager)
     , m_statusBarManager(nullptr)  // Will be created during initialization
     , m_cornerWidgetManager(mainWindow->m_cornerWidgetManager)
+    , m_virtualKeyboardDialog(nullptr)
     , m_windowLayoutCoordinator(mainWindow->m_windowLayoutCoordinator)
     , m_toolbarManager(mainWindow->toolbarManager)
     , m_windowControlManager(nullptr)  // Will be created during initialization
@@ -407,6 +409,20 @@ void MainWindowInitializer::setupToolbar()
                 m_mainWindow->settingDialog->selectPage(tr("Virtual Keyboard"));
             }
         });
+    });
+
+    // Connect virtual keyboard button to show/hide virtual keyboard dialog
+    connect(m_toolbarManager, &ToolbarManager::openVirtualKeyboard, m_mainWindow, [this]() {
+        if (!m_virtualKeyboardDialog) {
+            m_virtualKeyboardDialog = new VirtualKeyboardDialog(m_mainWindow);
+        }
+        if (m_virtualKeyboardDialog->isVisible()) {
+            m_virtualKeyboardDialog->hide();
+        } else {
+            m_virtualKeyboardDialog->show();
+            m_virtualKeyboardDialog->raise();
+            m_virtualKeyboardDialog->activateWindow();
+        }
     });
 
     // Connect CustomKeyManager signal to rebuild toolbar live

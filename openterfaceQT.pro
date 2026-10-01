@@ -139,6 +139,7 @@ SOURCES += main.cpp \
     ui/windowcontrolmanager.cpp \
     ui/toolbar/toggleswitch.cpp \
     ui/toolbar/toolbarmanager.cpp \
+    ui/virtualkeyboard/VirtualKeyboardDialog.cpp \
     ui/recording/recordingcontroller.cpp \
     ui/splashscreen.cpp \
     ui/preferences/cameraadjust.cpp \
@@ -341,6 +342,7 @@ HEADERS  += \
     ui/windowcontrolmanager.h \
     ui/toolbar/toggleswitch.h \
     ui/toolbar/toolbarmanager.h \
+    ui/virtualkeyboard/VirtualKeyboardDialog.h \
     ui/recording/recordingcontroller.h \
     ui/preferences/cameraadjust.h \
     ui/preferences/fpsspinbox.h \

@@ -23,6 +23,7 @@ public:
 signals:
     void toolbarVisibilityChanged(bool visible);
     void openCustomKeyConfig();
+    void openVirtualKeyboard();
 
 private:
     struct KeyInfo {
@@ -52,6 +53,7 @@ private slots:
     void onKeyButtonClicked();
     void onCtrlAltDelClicked();
     void onRepeatingKeystrokeChanged(int index);
+    void onVirtualKeyboardClicked();
 
 };
 
