@@ -11,5 +11,9 @@
         <file>japanese.json</file>
         <file>qwerty_es.json</file>
         <file>qwerty_it.json</file>
+        <file>qwerty_no.json</file>
+        <file>qwerty_fi.json</file>
+        <file>qwertz_ch.json</file>
+        <file>azerty_ch_fr.json</file>
     </qresource>
 </RCC> 
