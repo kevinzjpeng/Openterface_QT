@@ -5,134 +5,145 @@
 #include <QApplication>
 #include <QPalette>
 
-// Style constants for a realistic keyboard appearance
-static const QString standardKeyStyle =
+// Finger zone colors (MadTyping style)
+// Left pinky: light blue, Left ring: light green, Left middle: light yellow, Left index: light orange
+// Right index: light coral, Right middle: light pink, Right ring: light purple, Right pinky: light cyan
+static const QString leftPinkyStyle =
     "QPushButton { "
-    "   border: 1px solid #999; "
-    "   border-radius: 4px; "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #ffffff, stop:0.5 #e8e8e8, stop:1 #d0d0d0); "
-    "   color: #222; "
-    "   padding: 6px 8px; "
-    "   margin: 1px; "
-    "   min-width: 38px; "
-    "   min-height: 38px; "
-    "   font-size: 13px; "
-    "   font-weight: 500; "
+    "       stop:0 #d4e8ff, stop:0.5 #b8d4f0, stop:1 #9cc0e0); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
     "} "
-    "QPushButton:hover { "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c0dcff, stop:0.5 #a8c8e8, stop:1 #90b8d8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #a8c8e8, stop:0.5 #90b8d8, stop:1 #78a8c8); }";
+
+static const QString leftRingStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #f5f5f5, stop:0.5 #e0e0e0, stop:1 #c8c8c8); "
+    "       stop:0 #d4ffd4, stop:0.5 #b8e8b8, stop:1 #9cd09c); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
     "} "
-    "QPushButton:pressed { "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c0f0c0, stop:0.5 #a8d8a8, stop:1 #90c890); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #a8d8a8, stop:0.5 #90c890, stop:1 #78b878); }";
+
+static const QString leftMiddleStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
-    "   border: 1px solid #888; "
-    "   padding-top: 7px; "
-    "   padding-bottom: 5px; "
-    "}";
+    "       stop:0 #ffffd4, stop:0.5 #f0e8b8, stop:1 #e0d09c); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #fff0c0, stop:0.5 #e8d8a8, stop:1 #d8c890); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8d8a8, stop:0.5 #d8c890, stop:1 #c8b878); }";
+
+static const QString leftIndexStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #ffe8d4, stop:0.5 #f0d0b8, stop:1 #e0b89c); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffd8c0, stop:0.5 #e8c0a8, stop:1 #d8a890); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8c0a8, stop:0.5 #d8a890, stop:1 #c89878); }";
+
+static const QString rightIndexStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #ffd4d4, stop:0.5 #f0b8b8, stop:1 #e09c9c); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffc0c0, stop:0.5 #e8a8a8, stop:1 #d89090); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8a8a8, stop:0.5 #d89090, stop:1 #c87878); }";
+
+static const QString rightMiddleStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #ffd4e8, stop:0.5 #f0b8d0, stop:1 #e09cb8); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffc0d8, stop:0.5 #e8a8c0, stop:1 #d890a8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8a8c0, stop:0.5 #d890a8, stop:1 #c87890); }";
+
+static const QString rightRingStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #e8d4ff, stop:0.5 #d0b8f0, stop:1 #b89ce0); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #d8c0ff, stop:0.5 #c0a8e8, stop:1 #a890d8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c0a8e8, stop:0.5 #a890d8, stop:1 #9078c8); }";
+
+static const QString rightPinkyStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #d4ffff, stop:0.5 #b8e8e8, stop:1 #9cd0d0); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c0f0f0, stop:0.5 #a8d8d8, stop:1 #90c8c8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #a8d8d8, stop:0.5 #90c8c8, stop:1 #78b8b8); }";
+
+static const QString thumbStyle =
+    "QPushButton { "
+    "   border: 1px solid #999; border-radius: 4px; "
+    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+    "       stop:0 #f0f0f0, stop:0.5 #e0e0e0, stop:1 #d0d0d0); "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 38px; min-height: 38px; font-size: 13px; font-weight: 500; "
+    "} "
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); }";
 
 static const QString modifierKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #999; "
-    "   border-radius: 4px; "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
     "       stop:0 #f5f5f5, stop:0.5 #e0e0e0, stop:1 #cccccc); "
-    "   color: #222; "
-    "   padding: 6px 8px; "
-    "   margin: 1px; "
-    "   min-width: 50px; "
-    "   min-height: 38px; "
-    "   font-size: 12px; "
-    "   font-weight: 600; "
+    "   color: #222; padding: 6px 8px; margin: 1px; "
+    "   min-width: 50px; min-height: 38px; font-size: 12px; font-weight: 600; "
     "} "
-    "QPushButton:hover { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #eeeeee, stop:0.5 #d8d8d8, stop:1 #c0c0c0); "
-    "} "
-    "QPushButton:checked { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #d0e8ff, stop:0.5 #a0c8ff, stop:1 #80b0ff); "
-    "   border: 2px solid #4a90d9; "
-    "   color: #1a3a5c; "
-    "} "
-    "QPushButton:checked:hover { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #c0dfff, stop:0.5 #90c0ff, stop:1 #70a8ff); "
-    "}";
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #eeeeee, stop:0.5 #d8d8d8, stop:1 #c0c0c0); } "
+    "QPushButton:checked { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #d0e8ff, stop:0.5 #a0c8ff, stop:1 #80b0ff); border: 2px solid #4a90d9; color: #1a3a5c; } "
+    "QPushButton:checked:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c0dfff, stop:0.5 #90c0ff, stop:1 #70a8ff); }";
 
 static const QString functionKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #999; "
-    "   border-radius: 4px; "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
     "       stop:0 #f0f0f0, stop:0.5 #e0e0e0, stop:1 #d0d0d0); "
-    "   color: #444; "
-    "   padding: 4px 6px; "
-    "   margin: 1px; "
-    "   min-width: 36px; "
-    "   min-height: 30px; "
-    "   font-size: 11px; "
-    "   font-weight: 500; "
+    "   color: #444; padding: 4px 6px; margin: 1px; "
+    "   min-width: 36px; min-height: 30px; font-size: 11px; font-weight: 500; "
     "} "
-    "QPushButton:hover { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
-    "} "
-    "QPushButton:pressed { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
-    "}";
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); }";
 
-static const QString specialKeyStyle =
+static const QString navigationKeyStyle =
     "QPushButton { "
-    "   border: 1px solid #999; "
-    "   border-radius: 4px; "
+    "   border: 1px solid #999; border-radius: 4px; "
     "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
     "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
-    "   color: #333; "
-    "   padding: 6px 10px; "
-    "   margin: 1px; "
-    "   min-width: 45px; "
-    "   min-height: 38px; "
-    "   font-size: 12px; "
-    "   font-weight: 600; "
+    "   color: #333; padding: 4px 6px; margin: 1px; "
+    "   min-width: 36px; min-height: 30px; font-size: 11px; font-weight: 600; "
     "} "
-    "QPushButton:hover { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #e0e0e0, stop:0.5 #d0d0d0, stop:1 #c0c0c0); "
-    "} "
-    "QPushButton:pressed { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #c8c8c8, stop:0.5 #b8b8b8, stop:1 #a8a8a8); "
-    "}";
+    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #e0e0e0, stop:0.5 #d0d0d0, stop:1 #c0c0c0); } "
+    "QPushButton:pressed { background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #c8c8c8, stop:0.5 #b8b8b8, stop:1 #a8a8a8); }";
 
-static const QString spaceBarStyle =
-    "QPushButton { "
-    "   border: 1px solid #999; "
-    "   border-radius: 4px; "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #f0f0f0, stop:0.5 #e0e0e0, stop:1 #d0d0d0); "
-    "   color: #222; "
-    "   padding: 6px 20px; "
-    "   margin: 1px; "
-    "   min-width: 200px; "
-    "   min-height: 38px; "
-    "   font-size: 13px; "
-    "   font-weight: 500; "
-    "} "
-    "QPushButton:hover { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #e8e8e8, stop:0.5 #d8d8d8, stop:1 #c8c8c8); "
-    "} "
-    "QPushButton:pressed { "
-    "   background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
-    "       stop:0 #d0d0d0, stop:0.5 #c0c0c0, stop:1 #b0b0b0); "
-    "}";
-
-const QString VirtualKeyboardDialog::buttonStyle = standardKeyStyle;
+const QString VirtualKeyboardDialog::buttonStyle = thumbStyle;
 const QString VirtualKeyboardDialog::modifierButtonStyle = modifierKeyStyle;
-const QString VirtualKeyboardDialog::pressedButtonStyle = specialKeyStyle;
+const QString VirtualKeyboardDialog::pressedButtonStyle = navigationKeyStyle;
 
 VirtualKeyboardDialog::VirtualKeyboardDialog(QWidget *parent)
     : QDialog(parent)
@@ -219,6 +230,9 @@ void VirtualKeyboardDialog::createKeyboardLayout()
 
     // Row 5: Bottom row (Ctrl, Alt, Win, Space)
     addBottomRow(keyboardLayout, row++);
+
+    // Row 6: Navigation keys (arrows, Home, End, PageUp, PageDown)
+    addNavigationRow(keyboardLayout, row++);
 }
 
 void VirtualKeyboardDialog::addFunctionKeyRow(QGridLayout* layout, int row)
@@ -430,39 +444,157 @@ void VirtualKeyboardDialog::addBottomRow(QGridLayout* layout, int row)
     layout->addWidget(rightCtrlBtn, row, col++);
 }
 
+void VirtualKeyboardDialog::addNavigationRow(QGridLayout* layout, int row)
+{
+    int col = 0;
+
+    // Insert key (wider)
+    QPushButton* insertBtn = createKeyButton("Insert", Qt::Key_Insert);
+    insertBtn->setMinimumWidth(70);
+    layout->addWidget(insertBtn, row, col++, 1, 2);
+
+    // Home key (wider)
+    QPushButton* homeBtn = createKeyButton("Home", Qt::Key_Home);
+    homeBtn->setMinimumWidth(60);
+    layout->addWidget(homeBtn, row, col++, 1, 2);
+
+    // Page Up key (wider)
+    QPushButton* pageUpBtn = createKeyButton("PgUp", Qt::Key_PageUp);
+    pageUpBtn->setMinimumWidth(60);
+    layout->addWidget(pageUpBtn, row, col++, 1, 2);
+
+    // Delete key
+    QPushButton* delBtn = createKeyButton("Del", Qt::Key_Delete);
+    layout->addWidget(delBtn, row, col++);
+
+    // End key (wider)
+    QPushButton* endBtn = createKeyButton("End", Qt::Key_End);
+    endBtn->setMinimumWidth(60);
+    layout->addWidget(endBtn, row, col++, 1, 2);
+
+    // Page Down key (wider)
+    QPushButton* pageDownBtn = createKeyButton("PgDn", Qt::Key_PageDown);
+    pageDownBtn->setMinimumWidth(60);
+    layout->addWidget(pageDownBtn, row, col++, 1, 2);
+
+    // Arrow keys: Up, Left, Down, Right
+    QPushButton* upBtn = createKeyButton("↑", Qt::Key_Up);
+    upBtn->setMinimumWidth(40);
+    layout->addWidget(upBtn, row, col++, 1, 1);
+
+    // Left arrow
+    QPushButton* leftBtn = createKeyButton("←", Qt::Key_Left);
+    leftBtn->setMinimumWidth(40);
+    layout->addWidget(leftBtn, row, col++, 1, 1);
+
+    // Down arrow
+    QPushButton* downBtn = createKeyButton("↓", Qt::Key_Down);
+    downBtn->setMinimumWidth(40);
+    layout->addWidget(downBtn, row, col++, 1, 1);
+
+    // Right arrow
+    QPushButton* rightBtn = createKeyButton("→", Qt::Key_Right);
+    rightBtn->setMinimumWidth(40);
+    layout->addWidget(rightBtn, row, col++, 1, 1);
+}
+
 QPushButton* VirtualKeyboardDialog::createKeyButton(const QString& text, int keyCode, bool isModifier)
 {
     QPushButton* button = new QPushButton(text, this);
 
-    // Apply different styles based on key type for a more realistic look
+    // Apply finger zone colors based on key (MadTyping style)
     if (isModifier) {
-        button->setStyleSheet(modifierButtonStyle);
+        button->setStyleSheet(modifierKeyStyle);
     } else {
-        // Check for special keys that need different styling
-        bool isSpecial = false;
-        bool isFunction = false;
-        bool isSpace = false;
+        // Map keys to finger zones
+        switch (keyCode) {
+            // Left pinky: 1, Q, A, Z, Tab, CapsLock, Backspace
+            case Qt::Key_1:
+            case Qt::Key_Q:
+            case Qt::Key_A:
+            case Qt::Key_Z:
+            case Qt::Key_Tab:
+            case Qt::Key_CapsLock:
+            case Qt::Key_Backspace:
+                button->setStyleSheet(leftPinkyStyle);
+                break;
 
-        if (keyCode == Qt::Key_Space) {
-            isSpace = true;
-        } else if (keyCode >= Qt::Key_F1 && keyCode <= Qt::Key_F12) {
-            isFunction = true;
-        } else if (keyCode == Qt::Key_Backspace || keyCode == Qt::Key_Tab ||
-                   keyCode == Qt::Key_CapsLock || keyCode == Qt::Key_Return ||
-                   keyCode == Qt::Key_Escape || keyCode == Qt::Key_Delete ||
-                   keyCode == Qt::Key_Shift || keyCode == Qt::Key_Control ||
-                   keyCode == Qt::Key_Alt || keyCode == Qt::Key_Meta) {
-            isSpecial = true;
-        }
+            // Left ring: 2, W, S, X
+            case Qt::Key_2:
+            case Qt::Key_W:
+            case Qt::Key_S:
+            case Qt::Key_X:
+                button->setStyleSheet(leftRingStyle);
+                break;
 
-        if (isSpace) {
-            button->setStyleSheet(spaceBarStyle);
-        } else if (isFunction) {
-            button->setStyleSheet(functionKeyStyle);
-        } else if (isSpecial) {
-            button->setStyleSheet(specialKeyStyle);
-        } else {
-            button->setStyleSheet(buttonStyle);
+            // Left middle: 3, E, D, C
+            case Qt::Key_3:
+            case Qt::Key_E:
+            case Qt::Key_D:
+            case Qt::Key_C:
+                button->setStyleSheet(leftMiddleStyle);
+                break;
+
+            // Left index: 4,5,R,T,F,G,V,B
+            case Qt::Key_4:
+            case Qt::Key_5:
+            case Qt::Key_R:
+            case Qt::Key_T:
+            case Qt::Key_F:
+            case Qt::Key_G:
+            case Qt::Key_V:
+            case Qt::Key_B:
+                button->setStyleSheet(leftIndexStyle);
+                break;
+
+            // Right index: 6,7,Y,U,H,J,N,M
+            case Qt::Key_6:
+            case Qt::Key_7:
+            case Qt::Key_Y:
+            case Qt::Key_U:
+            case Qt::Key_H:
+            case Qt::Key_J:
+            case Qt::Key_N:
+            case Qt::Key_M:
+                button->setStyleSheet(rightIndexStyle);
+                break;
+
+            // Right middle: 8,I,K,,
+            case Qt::Key_8:
+            case Qt::Key_I:
+            case Qt::Key_K:
+            case Qt::Key_Comma:
+                button->setStyleSheet(rightMiddleStyle);
+                break;
+
+            // Right ring: 9,O,L,.
+            case Qt::Key_9:
+            case Qt::Key_O:
+            case Qt::Key_L:
+            case Qt::Key_Period:
+                button->setStyleSheet(rightRingStyle);
+                break;
+
+            // Right pinky: 0,-,=,P,[,],\,;,',/,Enter,Right Shift
+            case Qt::Key_0:
+            case Qt::Key_Minus:
+            case Qt::Key_Equal:
+            case Qt::Key_P:
+            case Qt::Key_BracketLeft:
+            case Qt::Key_BracketRight:
+            case Qt::Key_Backslash:
+            case Qt::Key_Semicolon:
+            case Qt::Key_Apostrophe:
+            case Qt::Key_Slash:
+            case Qt::Key_Return:
+            case Qt::Key_Shift: // Right Shift - handled separately in layout
+                button->setStyleSheet(rightPinkyStyle);
+                break;
+
+            // Default to standard style for space and other keys
+            default:
+                button->setStyleSheet(thumbStyle);
+                break;
         }
     }
 

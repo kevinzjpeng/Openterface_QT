@@ -29,6 +29,7 @@ private:
     void addCapsRow(QGridLayout* layout, int row);
     void addShiftRow(QGridLayout* layout, int row);
     void addBottomRow(QGridLayout* layout, int row);
+    void addNavigationRow(QGridLayout* layout, int row);
 
 private slots:
     void onKeyClicked();
