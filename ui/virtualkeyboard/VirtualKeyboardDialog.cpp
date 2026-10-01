@@ -62,6 +62,7 @@ VirtualKeyboardDialog::VirtualKeyboardDialog(QWidget *parent)
 
     setupUI();
     createKeyboardLayout();
+    adjustSize();
 }
 
 void VirtualKeyboardDialog::setupUI()
@@ -75,7 +76,6 @@ void VirtualKeyboardDialog::setupUI()
     mainLayout->addLayout(keyboardLayout);
 
     setLayout(mainLayout);
-    setFixedSize(sizeHint());
 }
 
 void VirtualKeyboardDialog::createKeyboardLayout()
