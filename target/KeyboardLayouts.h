@@ -183,7 +183,7 @@ struct KeyboardLayoutConfig {
         
         keyNameToQt["degree"] = Qt::Key_degree;   // ¨
         keyNameToQt["cent"] = Qt::Key_cent;         // ¢
-        keyNameToQt["EuroSign"] = Qt::Key_EuroSign; // €
+        keyNameToQt["EuroSign"] = 0x20AC;           // € (no Qt::Key enumerator)
         
 	// Spanish keys
 	keyNameToQt["Ntilde"] = Qt::Key_Ntilde;         // ñ
