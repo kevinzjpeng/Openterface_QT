@@ -2,6 +2,7 @@
 #define KEYBOARD_LAYOUTS_H
 
 #include <QMap>
+#include <QList>
 #include <QString>
 #include <QDir>
 #include <QFile>
@@ -13,10 +14,16 @@
 
 Q_DECLARE_LOGGING_CATEGORY(log_keyboard_layouts)
 
+struct KeyboardInputStep {
+    int keyCode;
+    int modifiers;
+};
+
 struct KeyboardLayoutConfig {
     QString name;
     QMap<int, uint8_t> keyMap;
-    QMap<int, int> charMapping;
+    QMap<uint32_t, int> charMapping;
+    QMap<uint32_t, QList<KeyboardInputStep>> charSequences;
     QMap<uint32_t, uint8_t> unicodeMap;
     QList<int> needShiftKeys;
     QList<int> needAltGrKeys;
@@ -112,7 +119,6 @@ struct KeyboardLayoutConfig {
         keyNameToQt["Question"] = Qt::Key_Question;     // ?
         // UK-specific keys
         keyNameToQt["sterling"] = Qt::Key_sterling;     // £
-        keyNameToQt["notsign"] = Qt::Key_notsign;       // ¬
         keyNameToQt["AltGr"] = Qt::Key_AltGr;
         // German-specific keys
         keyNameToQt["Udiaeresis"] = Qt::Key_Udiaeresis; // Ü
@@ -175,6 +181,11 @@ struct KeyboardLayoutConfig {
         // altgr keys
         
         keyNameToQt["degree"] = Qt::Key_degree;   // ¨
+
+        // Swiss-specific keys
+        keyNameToQt["cent"] = Qt::Key_cent;         // ¢
+        keyNameToQt["notsign"] = Qt::Key_notsign;   // ¬
+        keyNameToQt["EuroSign"] = Qt::Key_EuroSign; // €
         
 	// Spanish keys
 	keyNameToQt["Ntilde"] = Qt::Key_Ntilde;         // ñ
@@ -183,7 +194,7 @@ struct KeyboardLayoutConfig {
 
     }
     
-    // Public static member for key name to Qt key mapping (needed by KeyboardLayoutManager)
+private:
     static QMap<QString, int> keyNameToQt;
 };
 
@@ -199,34 +210,6 @@ public:
     
     // List available layouts
     QStringList getAvailableLayouts() const;
-    
-    // === Custom Layout Support ===
-    
-    // Get custom layouts directory path
-    static QString getCustomLayoutsDir();
-    
-    // Create a new custom layout based on an existing layout
-    bool createCustomLayout(const QString& baseName, const QString& customName);
-    
-    // Save a custom layout to file
-    bool saveCustomLayout(const KeyboardLayoutConfig& config, const QString& name);
-    
-    // Merge corrections into a base layout
-    KeyboardLayoutConfig mergeCorrections(const KeyboardLayoutConfig& base, 
-                                         const QMap<int, uint8_t>& keyMapCorrections,
-                                         const QMap<int, int>& charMapCorrections);
-    
-    // Export layout to JSON string
-    QString exportLayoutToJson(const KeyboardLayoutConfig& config) const;
-    
-    // Import layout from JSON file
-    bool importLayoutFromJson(const QString& jsonPath);
-    
-    // Get list of custom layouts (user-created)
-    QStringList getCustomLayouts() const;
-    
-    // Delete a custom layout
-    bool deleteCustomLayout(const QString& name);
 
 private:
     KeyboardLayoutManager() {} // Private constructor for singleton

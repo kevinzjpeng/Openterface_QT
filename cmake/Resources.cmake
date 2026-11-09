@@ -60,9 +60,11 @@ set(keyboard_layouts_resource_files
     "config/keyboards/azerty_be.json"
     "config/keyboards/japanese.json"
     "config/keyboards/qwerty_dk.json"
+    "config/keyboards/qwerty_se.json"
     "config/keyboards/qwerty_uk.json"
     "config/keyboards/qwerty_us.json"
     "config/keyboards/qwertz_de.json"
+    "config/keyboards/qwertz_ch.json"
     "config/keyboards/qwerty_es.json"
     "config/keyboards/qwerty_se.json"
 )
